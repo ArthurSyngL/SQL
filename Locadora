@@ -1,0 +1,209 @@
+/*
+CREATE DATABASE  LOCADORA;
+
+USE LOCADORA;
+*/
+
+CREATE TABLE ator
+(
+  data_nascimento DATE,
+  nome_popular varchar(100),
+  nome_artistico varchar(100),
+  id_ator integer NOT NULL,
+  CONSTRAINT id_ator PRIMARY KEY (id_ator)
+);
+
+CREATE TABLE categoria
+(
+  id_categoria integer NOT NULL,
+  nome varchar(100),
+  CONSTRAINT id_categotia PRIMARY KEY (id_categoria)
+);
+
+CREATE TABLE cliente
+(
+  id_cliente integer NOT NULL,
+  nome varchar(100),
+  endereco varchar(100),
+  telefone varchar(100),
+  CONSTRAINT idcliente PRIMARY KEY (id_cliente)
+);
+
+CREATE TABLE filme
+(
+  id_filme integer NOT NULL,
+  categoria integer,
+  titulo varchar(100),
+  CONSTRAINT id_filme PRIMARY KEY (id_filme),
+  CONSTRAINT categoria FOREIGN KEY (categoria) REFERENCES categoria (id_categoria) 
+);
+
+CREATE TABLE filme_ator
+(
+  filme_categoria_id_categoria integer,
+  filme_id_filme integer,
+  ator_id_ator integer,
+  id_filme_ator integer NOT NULL,
+  CONSTRAINT filme_ator_pkey PRIMARY KEY (id_filme_ator),
+  CONSTRAINT filme_ator_ator_id_ator_fkey FOREIGN KEY (ator_id_ator) REFERENCES ator (id_ator),
+  CONSTRAINT filme_ator_filme_categoria_id_categoria_fkey FOREIGN KEY (filme_categoria_id_categoria) REFERENCES categoria (id_categoria),
+  CONSTRAINT filme_ator_filme_id_filme_fkey FOREIGN KEY (filme_id_filme) REFERENCES filme (id_filme) 
+);
+
+CREATE TABLE dvds
+(
+  id_dvd integer NOT NULL,
+  filme integer,
+  categoria integer,
+  CONSTRAINT id_dvd PRIMARY KEY (id_dvd),
+  CONSTRAINT dvds_categoria_fkey FOREIGN KEY (categoria) REFERENCES categoria (id_categoria),
+  CONSTRAINT dvds_filme_fkey FOREIGN KEY (filme) REFERENCES filme (id_filme) 
+);
+
+CREATE TABLE aluguel
+(
+  id_aluguel integer NOT NULL,
+  numero_cliente integer,
+  dvd_filme_id_filme integer,
+  dvd_id_dvd integer,
+  dvd_filme_categoria_id_categoria integer,
+  data_emprestimo date,
+  data_devolucao date,
+  CONSTRAINT id_aluguel PRIMARY KEY (id_aluguel),
+  CONSTRAINT aluguel_dvd_filme_categoria_id_categoria_fkey FOREIGN KEY (dvd_filme_categoria_id_categoria)
+      REFERENCES categoria (id_categoria),
+  CONSTRAINT aluguel_dvd_filme_id_filme_fkey FOREIGN KEY (dvd_filme_id_filme)
+      REFERENCES filme (id_filme) ,
+  CONSTRAINT aluguel_dvd_id_dvd_fkey FOREIGN KEY (dvd_id_dvd)
+      REFERENCES dvds (id_dvd),
+  CONSTRAINT aluguel_numero_cliente_fkey FOREIGN KEY (numero_cliente)
+      REFERENCES cliente (id_cliente) );
+
+
+/*
+Inserções nas tabelas
+*/
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (1, 'Joao Paulo Oliveira', 'qnq 16 brasilia', '98253412');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (2, 'Ana Maria Lima', 'park avenue qd-55 park way', '98267899');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (3, 'Maria Silva Aparecida', 'taguatinga centro sq13', '90028765');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (4, 'Claudia Maria Gomes', 'Luziania - maravilhacs14', '98124567');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (5, 'Jose Augusto Silva', 'valparaizo br-040 km3 lt8', '98654376');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (6, 'Jose Maria Martins', 'valparaizo br-040 km3 lt8', '98654376');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (7, 'Jose Felipe Pereira', 'valparaizo br-040 km3 lt8', '98654376');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (8, 'Felipe Gabriel Cruz', 'valparaizo br-040 km3 lt8', '98654376');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (9, 'Gabriel Bruno Rodrigues', 'valparaizo br-040 km3 lt8', '98654376');
+INSERT INTO cliente(id_cliente, nome, endereco, telefone) VALUES (10, 'Maria Joaquina Santos', 'valparaizo br-040 km3 lt8', '98654376');
+
+
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('1990-02-16', 'Robyn Rihanna Fenty ', 'Rihanna', 1);
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('1983-10-06' , 'Curtis James Jackson', '50cent', 2);
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('1960-05-26' , 'aĶriclenes Venâncio', 'Lima Duarte',3);
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('1980-09-04', 'Demetria Gene ', 'Demi Moore', 4);
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('1950-02-14' , 'Arlette Pinheiro', 'Fernada Montenegro', 5);
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('1995-03-14' , 'Adam Sandler', 'Adam Sandler', 6);
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('2000-03-05' , 'Will Smith', 'Will Smith', 7);
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('2004-11-12' , 'Sandra Bullock', 'Sandra Bullock', 8);
+INSERT INTO ator(data_nascimento, nome_popular, nome_artistico, id_ator) VALUES ('2006-05-10' , 'Marilyn Monroe', 'Marilyn Monroe', 9);
+
+
+INSERT INTO categoria(id_categoria, nome) VALUES (1, 'Açao');
+INSERT INTO categoria(id_categoria, nome) VALUES (2, 'Comedia');
+INSERT INTO categoria(id_categoria, nome) VALUES (3, 'Suspense');
+INSERT INTO categoria(id_categoria, nome) VALUES (4, 'Aventura');
+INSERT INTO categoria(id_categoria, nome) VALUES (5, 'Infantil');
+INSERT INTO categoria(id_categoria, nome) VALUES (6, 'Terror');
+INSERT INTO categoria(id_categoria, nome) VALUES (7, 'Drama');
+
+    
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (1, 1, 'senhor dos aneis');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (2, 3, 'joao e maria');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (3, 4, 'Matrix');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (4, 5, 'Harry Poter');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (5, 2, 'Alto da Copadecida');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (6, 6, 'O Exorcista');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (7, 1, 'Clube da Luta');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (8, 3, 'Corra!');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (9, 7, 'Um Sonho de Liberdade');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (10, 3, 'O Poderoso Chefão');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (11, 4, 'Forrest Gump - O Contador de Histórias');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (12, 5, 'O Rei Leão');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (13, 7, 'À Espera de um Milagre');
+INSERT INTO filme(id_filme, categoria, titulo) VALUES (14, 4, 'A Vida é Bela');
+
+
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (1, 2, 2);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (2, 1, 1);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (3, 3, 3);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (4, 5, 5);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (5, 4, 4);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (6, 10, 3);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (7, 11, 4);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (8, 12, 5);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (9, 13, 7);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (10, 14, 4);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (11, 14, 4);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (12, 13, 7);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (13, 10, 3);
+INSERT INTO dvds(id_dvd, filme, categoria) VALUES (14, 1, 1);
+    
+INSERT INTO filme_ator(filme_categoria_id_categoria, filme_id_filme, ator_id_ator, id_filme_ator) VALUES (1, 1, 2, 1);
+INSERT INTO filme_ator(filme_categoria_id_categoria, filme_id_filme, ator_id_ator, id_filme_ator) VALUES (3, 3, 3, 2);
+INSERT INTO filme_ator(filme_categoria_id_categoria, filme_id_filme, ator_id_ator, id_filme_ator) VALUES (2, 2, 1, 3);
+INSERT INTO filme_ator(filme_categoria_id_categoria, filme_id_filme, ator_id_ator, id_filme_ator) VALUES (4, 5, 4, 4);
+INSERT INTO filme_ator(filme_categoria_id_categoria, filme_id_filme, ator_id_ator, id_filme_ator) VALUES (5, 4, 5, 5);
+
+
+INSERT INTO aluguel(id_aluguel, numero_cliente, dvd_filme_id_filme, dvd_id_dvd, dvd_filme_categoria_id_categoria, data_emprestimo, data_devolucao)
+    VALUES (1, 2, 3, 4, 5, '1983-10-06','1983-10-06');
+INSERT INTO aluguel(id_aluguel, numero_cliente, dvd_filme_id_filme, dvd_id_dvd, dvd_filme_categoria_id_categoria, data_emprestimo,data_devolucao)
+    VALUES (2, 2, 4, 3, 2, '002-04-16','2002-04-24');
+INSERT INTO aluguel(id_aluguel, numero_cliente, dvd_filme_id_filme, dvd_id_dvd, dvd_filme_categoria_id_categoria, data_emprestimo,data_devolucao)
+    VALUES (3, 3, 3, 3, 2, '2003-03-22' ,'2003-03-28' );
+INSERT INTO aluguel(id_aluguel, numero_cliente, dvd_filme_id_filme, dvd_id_dvd, dvd_filme_categoria_id_categoria, data_emprestimo,data_devolucao)
+    VALUES (4, 4, 2, 3, 2, '2004-02-29' ,'2004-02-10');
+INSERT INTO aluguel(id_aluguel, numero_cliente, dvd_filme_id_filme, dvd_id_dvd, dvd_filme_categoria_id_categoria, data_emprestimo,data_devolucao)
+    VALUES (5, 5, 3, 3, 2, '2004-02-29' ,'2004-02-10');
+
+SELECT nome_popular
+FROM ator
+ORDER BY nome_popular ASC;
+
+SELECT nome
+FROM categoria
+ORDER BY nome DESC;
+
+SELECT nome, endereco
+FROM cliente
+WHERE nome LIKE 'Joao%';
+
+SELECT titulo
+FROM filme
+WHERE titulo like 'Senhor%';
+
+SELECT COUNT(*) FROM dvds;
+
+Select titulo,categoria
+From filme
+WHERE id_filme >= 4;
+
+SELECT AVG (id_categoria) as media_categoria
+FROM categoria;
+
+SELECT MAX (id_cliente)
+FROM cliente;
+
+SELECT nome_artistico, data_nascimento
+FROM ator
+WHERE data_nascimento >= 1980-10-10;
+
+SELECT id_aluguel, data_emprestimo
+FROM aluguel
+WHERE data_emprestimo >= '2000-01-01';
+
+SELECT id_filme, titulo
+FROM filme
+WHERE id_filme IN (2, 5, 10, 43, 47, 66);
+
+SELECT *
+FROM aluguel
+WHERE id_aluguel IN (2);
