@@ -207,3 +207,15 @@ WHERE id_filme IN (2, 5, 10, 43, 47, 66);
 SELECT *
 FROM aluguel
 WHERE id_aluguel IN (2);
+
+/*
+  Aula 12/09/23
+*/
+SELECT a.nome_artistico, f.titulo
+FROM ator a, filme f, filme_ator fa
+WHERE a.id_ator = fa.ator_id_ator
+ and f.id_filme = fa.filme_id_filme
+
+select a.nome_artistico, f.titulo
+from ator a inner join filme_ator fa on (a.id_ator = fa.ator_id_ator)
+inner join filme f on (f.id_filme = fa.filme_id_filme);
