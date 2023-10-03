@@ -1,0 +1,21 @@
+/*
+  Questao01
+*/
+
+SELECT AVG(populacao) 
+FROM cidade
+WHERE  capital = "N";
+
+SELECT cidade
+FROM  Pais p INNER JOIN Rio r ON (R.Pais = P.codigo)
+WHERE C.capital = 'S' AND
+      R.nome = "Parana";
+
+SELECT *
+FROM Pais
+WHERE expec_vida <70;
+
+Select p.nome, c.nome
+FROM Pais p INNER JOIN cidade c ON (c.pais=p.codigo)
+Where capital='S'
+
