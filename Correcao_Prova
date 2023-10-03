@@ -1,7 +1,3 @@
-/*
-  Questao01
-*/
-
 SELECT AVG(populacao) 
 FROM cidade
 WHERE  capital = "N";
