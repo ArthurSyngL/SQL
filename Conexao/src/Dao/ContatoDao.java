@@ -2,7 +2,12 @@ package src.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import src.Conexao.ConexaoTeste;
 
@@ -32,6 +37,33 @@ public class ContatoDao {
            stat.close();
         }catch (SQLException e){
             System.out.println("Deu erro!!");
+        }
+    }
+
+    public List<Contato> getList(){
+        try {
+            List<Contato> contatos = new ArrayList<Contato>();
+            String sql = "select * from contatos";
+            PreparedStatement stat = this.connection.prepareStatement(sql);
+            ResultSet rs = stat.executeQuery();
+
+            while (rs.next()){
+
+                //criando o objeto contato
+
+                Contato contato = new Contato();
+                contato.setCodigo(rs.getInt("codigo"));
+                contato.setNome(rs.getString("Nome"));
+
+                contatos.add(contato);
+            }
+
+            rs.close();
+            stat.close();
+            return contatos;
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
         }
     }
 }
