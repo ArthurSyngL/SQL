@@ -1,5 +1,5 @@
 CREATE TABLE aeroporto(
 	codigo int PRIMARY KEY,
 	nome varchar(60),
-	Localizacao varchar(60)
+	localizacao varchar(50)
 )
