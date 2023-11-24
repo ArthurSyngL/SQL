@@ -47,7 +47,6 @@ public class Main {
     }
 
     public static void adicionarAeroporto(){
-        // Modulo Contato
         Scanner scanner = new Scanner(System.in);
 
         Aeroporto aeroporto = new Aeroporto();
@@ -68,7 +67,6 @@ public class Main {
 
 
     public static void alterarAeroporto(){
-        // Modulo Contato
 
         Scanner scanner = new Scanner(System.in);
 
@@ -88,7 +86,6 @@ public class Main {
 
     }
     public static void excluirAeroporto(){
-        // Modulo Contato
 
         Scanner scanner = new Scanner(System.in);
 
