@@ -71,13 +71,13 @@ public class AeroportoDao {
     }
 
     public void alterar(Aeroporto aeroporto){
-        String sql = "uptade aeroporto set nome=? where codigo=? and localizacao = ?";
+        String sql = "update aeroporto set nome=?, localizacao=? where codigo=?";
         try {
             PreparedStatement stat = connection.prepareStatement(sql);
 
-            stat.setLong(1, aeroporto.getCodigo());
-            stat.setString(2, aeroporto.getNome());
-            stat.setString(3, aeroporto.getLocalizacao());
+            stat.setString(1, aeroporto.getNome());
+            stat.setString(2, aeroporto.getLocalizacao());
+            stat.setLong(3, aeroporto.getCodigo());
 
             stat.execute();
             stat.close();
