@@ -11,9 +11,9 @@ public class Conexao {
     private Connection com;
 
 public Conexao() {
-        url = "jdbc:postgresql://localhost:5432/Java_SQL";
+        url = "jdbc:postgresql://localhost:5432/Aeroporto";
         usuario = "postgres";
-        senha = "ifg";
+        senha = "arthur";
 
         try {
             Class.forName("org.postgresql.Driver");
